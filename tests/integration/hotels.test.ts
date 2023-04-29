@@ -244,7 +244,7 @@ describe('GET /hotel/:id', () => {
       const ticketType = await createTicketType(isRemote, includesHotel);
       await createTicket(enrollment.id, ticketType.id, TicketStatus.PAID);
       const hotel = await createHotel();
-      const room = await createRoom(hotel.id);
+      await createRoom(hotel.id);
 
       const response = await server.get(`/hotels/${hotel.id}`).set('Authorization', `Bearer ${token}`);
       expect(response.body).toEqual({
