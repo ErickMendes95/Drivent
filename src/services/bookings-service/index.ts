@@ -27,7 +27,9 @@ async function postBookings(userId: number, roomId: number) {
 
   await bookingsRepository.postBookings(userId, room.id);
   const booking = await bookingsRepository.getBookingsByUserId(userId);
-  return booking.id;
+  return {
+    bookingId: booking.id,
+  };
 }
 
 async function updateBookings(roomId: number, bookingId: number) {
@@ -39,7 +41,9 @@ async function updateBookings(roomId: number, bookingId: number) {
   if (room.capacity === room.Booking.length) throw forbiddenError();
 
   const newBooking = await bookingsRepository.updateRoomIdOfBooking(bookingId, roomId);
-  return newBooking.id;
+  return {
+    bookingId: newBooking.id,
+  };
 }
 
 export default { getBookings, postBookings, updateBookings };
