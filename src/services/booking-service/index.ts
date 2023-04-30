@@ -8,7 +8,17 @@ async function getBookings(userId: number) {
   const bookings = await bookingsRepository.getBookingsByUserId(userId);
   if (!bookings) throw notFoundError();
 
-  return bookings;
+  return {
+    id: bookings.id,
+    Room: {
+      id: bookings.Room.id,
+      name: bookings.Room.name,
+      capacity: bookings.Room.capacity,
+      hotelId: bookings.Room.hotelId,
+      createdAt: bookings.Room.createdAt,
+      updatedAt: bookings.Room.updatedAt,
+    },
+  };
 }
 
 async function postBookings(userId: number, roomId: number) {

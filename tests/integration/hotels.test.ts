@@ -231,7 +231,6 @@ describe('GET /hotel/:id', () => {
       await createRoom(hotel.id);
 
       const response = await server.get('/hotels/0').set('Authorization', `Bearer ${token}`);
-      console.log(response.body);
 
       expect(response.status).toBe(httpStatus.NOT_FOUND);
     });
